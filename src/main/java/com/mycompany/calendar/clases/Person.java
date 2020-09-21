@@ -76,7 +76,7 @@ public class Person implements TriFunction{
     
     
     public String getInfo(){
-        return this.name + ", " + this.age;
+        return "Hola, soy " + this.name + ", mi edad es: " + this.age + "Este es mi DPI: " + this.dpi;
     }
 
     @Override

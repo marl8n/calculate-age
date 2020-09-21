@@ -23,7 +23,7 @@ public class AgeUtils {
     
     public static TriFunction<Integer, Integer, Integer, Integer> calculateAge =
             (day, month, year) -> Period.between(
-                    parseDate.apply(day, month, year), LocalDate.now()
+                    parseDate.apply(day, month, year), LocalDate.now()  
             ).getYears();
     
     //inferencia de datos
