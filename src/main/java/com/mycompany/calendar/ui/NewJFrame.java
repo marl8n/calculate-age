@@ -7,6 +7,7 @@ package com.mycompany.calendar.ui;
 
 import com.mycompany.calendar.clases.Person;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -41,6 +42,8 @@ public class NewJFrame extends javax.swing.JFrame {
         addButton = new javax.swing.JButton();
         nameField = new javax.swing.JTextField();
         dpiField = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listOfPersons = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,12 +60,14 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
+        jScrollPane1.setViewportView(listOfPersons);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(63, 63, 63)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
@@ -73,12 +78,16 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(nameField)
                             .addComponent(dpiField, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE))
-                        .addContainerGap(171, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(birthDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(addButton)
                         .addGap(27, 27, 27))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,7 +107,9 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1)
                             .addComponent(birthDateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(207, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         pack();
@@ -106,11 +117,9 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void addButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addButtonMouseClicked
         persons.add(c, new Person(dpiField.getText() , nameField.getText(), birthDateField.getDate()));
-        
+        c++;
         cleanFields();
-        
-        this.showPerson();
-        
+        setPersonsInfo();
     }//GEN-LAST:event_addButtonMouseClicked
 
     
@@ -121,9 +130,15 @@ public class NewJFrame extends javax.swing.JFrame {
         birthDateField.setCalendar(null);
     }
     
-    private void showPerson()
-    {
-        JOptionPane.showMessageDialog(rootPane, this.persons.get(0).getInfo());
+    
+    
+    
+    private void setPersonsInfo(){
+        DefaultListModel model = new DefaultListModel();
+        for (int i = 0; i < c; i++ ){
+            model.add(i, persons.get(i).getInfo());
+        }
+        listOfPersons.setModel(model);
     }
     /**
      * @param args the command line arguments
@@ -167,6 +182,8 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> listOfPersons;
     private javax.swing.JTextField nameField;
     // End of variables declaration//GEN-END:variables
 }
