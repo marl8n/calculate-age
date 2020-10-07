@@ -6,6 +6,7 @@
 package com.mycompany.calendar.ui;
 
 import com.mycompany.calendar.clases.Person;
+import com.mycompany.calendar.clases.Student;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -17,7 +18,7 @@ import javax.swing.JOptionPane;
 public class NewJFrame extends javax.swing.JFrame {
 
     Integer c = 0;
-    ArrayList<Person> persons = new ArrayList<Person>();
+    ArrayList<Student> students = new ArrayList<Student>();
     
     /**
      * Creates new form NewJFrame
@@ -116,7 +117,7 @@ public class NewJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addButtonMouseClicked
-        persons.add(c, new Person(dpiField.getText() , nameField.getText(), birthDateField.getDate()));
+        students.add(c, new Student(dpiField.getText() , nameField.getText(), birthDateField.getDate()));
         c++;
         cleanFields();
         setPersonsInfo();
@@ -136,7 +137,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private void setPersonsInfo(){
         DefaultListModel model = new DefaultListModel();
         for (int i = 0; i < c; i++ ){
-            model.add(i, persons.get(i).getInfo());
+            model.add(i, students.get(i).getInfo());
         }
         listOfPersons.setModel(model);
     }
