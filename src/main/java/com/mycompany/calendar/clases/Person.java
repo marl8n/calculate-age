@@ -66,7 +66,7 @@ public abstract class Person implements TriFunction{
         Calendar c = Calendar.getInstance();
         c.setTime(birthDate);
         Integer year = c.get(Calendar.YEAR);
-        Integer month = c.get(Calendar.MONTH);
+        Integer month = c.get(Calendar.MONTH) + 1;
         Integer day = c.get(Calendar.DAY_OF_MONTH);
         
         this.age = calculateAge.apply(day, month, year);
