@@ -5,7 +5,6 @@
  */
 package com.mycompany.calendar.clases;
 
-import com.mycompany.calendar.clases.AgeUtils.AgeUtils;
 import com.mycompany.calendar.clases.AgeUtils.AgeUtils.TriFunction;
 import static com.mycompany.calendar.clases.AgeUtils.AgeUtils.calculateAge;
 import java.util.Calendar;
@@ -63,7 +62,7 @@ public class Person implements TriFunction{
     }    
     
     
-    private void calcAge(){
+    public void calcAge(){
         Calendar c = Calendar.getInstance();
         c.setTime(birthDate);
         Integer year = c.get(Calendar.YEAR);
@@ -75,8 +74,12 @@ public class Person implements TriFunction{
     }
     
     
-    public String getInfo(){
-        return "Hola, soy " + this.name + ", mi edad es: " + this.age + "Este es mi DPI: " + this.dpi;
+    public Object[] getInfo(){
+        Object[] o = new Object[3];
+        o[0] = this.dpi.toString();
+        o[1] = this.name.toString();
+        o[2] = this.age.toString();
+        return o;
     }
 
     @Override

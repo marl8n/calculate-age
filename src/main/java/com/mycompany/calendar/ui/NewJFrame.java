@@ -6,9 +6,9 @@
 package com.mycompany.calendar.ui;
 
 import com.mycompany.calendar.clases.Person;
-import java.util.ArrayList;
-import javax.swing.DefaultListModel;
+import java.util.LinkedList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,7 +17,9 @@ import javax.swing.JOptionPane;
 public class NewJFrame extends javax.swing.JFrame {
 
     Integer c = 0;
-    ArrayList<Person> persons = new ArrayList<Person>();
+    LinkedList<Person> persons = new LinkedList<>();
+    Boolean editing = false;
+    Integer idx = -1;
     
     /**
      * Creates new form NewJFrame
@@ -35,6 +37,8 @@ public class NewJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        popUpMenuTable = new javax.swing.JPopupMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         birthDateField = new com.toedter.calendar.JDateChooser();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -43,7 +47,15 @@ public class NewJFrame extends javax.swing.JFrame {
         nameField = new javax.swing.JTextField();
         dpiField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        listOfPersons = new javax.swing.JList<>();
+        jTable1 = new javax.swing.JTable();
+
+        jMenuItem1.setText("Editar");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        popUpMenuTable.add(jMenuItem1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,34 +72,41 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        jScrollPane1.setViewportView(listOfPersons);
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "DPI", "Nombre", "Edad"
+            }
+        ));
+        jTable1.setComponentPopupMenu(popUpMenuTable);
+        jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(63, 63, 63)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel1))
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(nameField)
-                            .addComponent(dpiField, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(birthDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(addButton)
-                        .addGap(27, 27, 27))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(63, 63, 63)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1))
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(dpiField)
+                            .addComponent(birthDateField, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                            .addComponent(nameField))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                        .addComponent(addButton)))
+                .addGap(27, 27, 27))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,20 +126,47 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1)
                             .addComponent(birthDateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void addButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addButtonMouseClicked
-        persons.add(c, new Person(dpiField.getText() , nameField.getText(), birthDateField.getDate()));
-        c++;
+        if (!dpiField.getText().isEmpty() && !nameField.getText().isEmpty() && !editing)
+        {
+            persons.add(c, new Person(dpiField.getText() , nameField.getText(), birthDateField.getDate()));
+            c++;
+        }
+        else if (editing)
+        {
+            persons.get(idx).setBirthDate(birthDateField.getDate());
+            persons.get(idx).setDpi(dpiField.getText());
+            persons.get(idx).setName(nameField.getText());
+            persons.get(idx).calcAge();
+            
+            editing = false;
+            addButton.setText("Agregar");
+            
+        }
+        
+        setDataInTable();
         cleanFields();
-        setPersonsInfo();
     }//GEN-LAST:event_addButtonMouseClicked
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        if (jTable1.getSelectedRow() >= 0)
+        {
+            addButton.setText("Editar");
+            editing = true;
+            idx = jTable1.getSelectedRow();
+            nameField.setText(persons.get(idx).getName());
+            dpiField.setText(persons.get(idx).getDpi());
+            birthDateField.setDate(persons.get(idx).getBirthDate());
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     
     private void cleanFields ()
@@ -130,16 +176,17 @@ public class NewJFrame extends javax.swing.JFrame {
         birthDateField.setCalendar(null);
     }
     
-    
-    
-    
-    private void setPersonsInfo(){
-        DefaultListModel model = new DefaultListModel();
-        for (int i = 0; i < c; i++ ){
-            model.add(i, persons.get(i).getInfo());
+    private void setDataInTable(){
+        DefaultTableModel modelTable = (DefaultTableModel) jTable1.getModel();
+        modelTable.setRowCount(0);
+        for ( int i = 0; i < c; i++ )
+        {
+            modelTable.addRow(persons.get(i).getInfo());
         }
-        listOfPersons.setModel(model);
+        jTable1.setModel(modelTable);
     }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -182,8 +229,10 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList<String> listOfPersons;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField nameField;
+    private javax.swing.JPopupMenu popUpMenuTable;
     // End of variables declaration//GEN-END:variables
 }
