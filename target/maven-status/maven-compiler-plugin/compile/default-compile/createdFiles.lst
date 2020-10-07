@@ -1,7 +1,11 @@
 com/mycompany/calendar/ui/NewJFrame$1.class
+<<<<<<< HEAD
 com/mycompany/calendar/ui/NewJFrame$3.class
+=======
+>>>>>>> 77e57789720b1564bc1f1b004a7905531a4a6ad3
 com/mycompany/calendar/clases/AgeUtils/AgeUtils.class
 com/mycompany/calendar/ui/NewJFrame.class
 com/mycompany/calendar/clases/AgeUtils/AgeUtils$TriFunction.class
+com/mycompany/calendar/clases/Student.class
 com/mycompany/calendar/clases/Person.class
 com/mycompany/calendar/ui/NewJFrame$2.class

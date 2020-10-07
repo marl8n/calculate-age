@@ -14,7 +14,7 @@ import java.util.Date;
  *
  * @author marl8n
  */
-public class Person implements TriFunction{
+public abstract class Person implements TriFunction{
     
     private String dpi;
     private String name;

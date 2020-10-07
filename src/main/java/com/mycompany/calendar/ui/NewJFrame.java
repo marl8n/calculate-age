@@ -7,6 +7,9 @@ package com.mycompany.calendar.ui;
 
 import com.mycompany.calendar.clases.Person;
 import java.util.LinkedList;
+import com.mycompany.calendar.clases.Student;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -137,7 +140,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private void addButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addButtonMouseClicked
         if (!dpiField.getText().isEmpty() && !nameField.getText().isEmpty() && !editing)
         {
-            persons.add(c, new Person(dpiField.getText() , nameField.getText(), birthDateField.getDate()));
+            persons.add(c, new Person(dpiField.getText() , nameField.getText(), birthDateField.getDate()) {});
             c++;
         }
         else if (editing)
